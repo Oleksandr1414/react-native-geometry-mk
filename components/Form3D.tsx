@@ -1,3 +1,5 @@
+import ListPentagonalPyramids from "../models/lists/list_pentagonal_pyramid";
+import ListRectanglePrisms from "../models/lists/list_rectangle_prism";
 import PentagonalPyramid from "../models/pentagonal_pyramid";
 import React from "react";
 import RectanglePrism from "../models/rectangle_prism";
@@ -7,6 +9,9 @@ import { styles } from "../styles/global";
 export default function Form3D() {
   const [isRectanglePrism, setIsRectanglePrism] =
     React.useState<boolean>(false);
+  const listPentagonalPyramids: ListPentagonalPyramids =
+    new ListPentagonalPyramids();
+  const listRectanglePrisms: ListRectanglePrisms = new ListRectanglePrisms();
 
   const [a, setA] = React.useState<number>(0);
   const [b, setB] = React.useState<number>(0);

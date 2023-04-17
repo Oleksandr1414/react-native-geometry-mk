@@ -1,11 +1,16 @@
+import Container from "../models/base/container";
+import ListRhombs from "../models/lists/list_rhombs";
 import React from "react";
 import Rectangle from "../models/rectangle";
 import Rhomb from "../models/rhomb";
 import { Button, Text, TextInput, View } from "react-native";
 import { styles } from "../styles/global";
+import ListRectangles from "../models/lists/list_rectangles";
 
 export default function Form2D() {
   const [isRhombSelected, setIsRhombSelected] = React.useState<boolean>(false);
+  const listRhombs: ListRhombs = new ListRhombs();
+  const listRectangles: ListRectangles = new ListRectangles();
 
   const [a, setA] = React.useState<number>(0);
   const [b, setB] = React.useState<number>(0);

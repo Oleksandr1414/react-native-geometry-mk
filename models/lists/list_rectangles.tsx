@@ -1,7 +1,7 @@
 import Container from "../base/container";
 import Rectangle from "../rectangle";
 
-export default class ListRectangle implements Container<Rectangle> {
+export default class ListRectangles implements Container<Rectangle> {
   private items: Rectangle[] = [];
 
   addItem(item: Rectangle): void {

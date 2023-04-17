@@ -1,7 +1,7 @@
 import Container from "../base/container";
 import PentagonalPyramid from "../pentagonal_pyramid";
 
-export default class ListPentagonalPyramid
+export default class ListPentagonalPyramids
   implements Container<PentagonalPyramid>
 {
   private items: PentagonalPyramid[] = [];

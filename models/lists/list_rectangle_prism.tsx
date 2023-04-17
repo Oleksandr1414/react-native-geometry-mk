@@ -1,7 +1,7 @@
 import Container from "../base/container";
 import RectanglePrism from "../rectangle_prism";
 
-export default class ListRectanglePrism implements Container<RectanglePrism> {
+export default class ListRectanglePrisms implements Container<RectanglePrism> {
   private items: RectanglePrism[] = [];
 
   addItem(item: RectanglePrism): void {
