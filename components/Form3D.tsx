@@ -60,14 +60,14 @@ export default function Form3D() {
         style={{ fontSize: 16, fontWeight: "bold", padding: "5px 0" }}
         key={"text1"}
       >
-        Rectangle Prisms -----------------------------
+        Rectangle Prisms -----------------------
       </Text>,
       ...viewList(listRectanglePrisms),
       <Text
         style={{ fontSize: 16, fontWeight: "bold", padding: "5px 0" }}
         key={"text2"}
       >
-        Pentagonal Pyramids -------------------------
+        Pentagonal Pyramids ------------------
       </Text>,
       ...viewList(listPentagonalPyramids),
     ];

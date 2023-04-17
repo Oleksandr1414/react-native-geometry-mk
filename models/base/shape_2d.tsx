@@ -4,4 +4,6 @@ export default interface Shape2D {
   getArea(): number;
   getInscribedRadius(): number;
   getCircumscribedRadius(): number;
+
+  toFloat3(value: any): number;
 }

@@ -11,17 +11,20 @@ export default class PentagonalPyramid implements Shape3D {
     this.H = H;
   }
 
+  public toFloat3(value: any): number {
+    return parseFloat(value.toFixed(3));
+  }
+
   private getBaseArea(): number {
-    return parseFloat(
-      (
-        ((Math.sqrt(this.H * this.H - this.h * this.h) * this.a) / 2) *
-        5
-      ).toFixed(3)
-    );
+    return this.h > this.H
+      ? 0
+      : this.toFloat3(
+          ((Math.sqrt(this.H * this.H - this.h * this.h) * this.a) / 2) * 5
+        );
   }
 
   public getVolume(): number {
-    return parseFloat(((1 / 3) * this.getBaseArea() * this.H).toFixed());
+    return this.toFloat3((1 / 3) * this.getBaseArea() * this.H);
   }
 
   public getLateralArea(): number {
@@ -29,6 +32,6 @@ export default class PentagonalPyramid implements Shape3D {
   }
 
   public getTotalArea(): number {
-    return parseFloat((this.getBaseArea() + this.getLateralArea()).toFixed(3));
+    return this.toFloat3(this.getBaseArea() + this.getLateralArea());
   }
 }

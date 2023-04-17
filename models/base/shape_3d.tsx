@@ -3,4 +3,6 @@ export default interface Shape3D {
   getVolume(): number;
   getLateralArea(): number;
   getTotalArea(): number;
+
+  toFloat3(value: any): number;
 }

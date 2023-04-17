@@ -12,6 +12,9 @@ export default class Rhomb implements Shape2D {
     this.d1 = d1;
     this.d2 = d2;
   }
+  public toFloat3(value: any): number {
+    return parseFloat(value.toFixed(3));
+  }
 
   public getPerimeter(): number {
     return 4 * this.a;
@@ -22,10 +25,10 @@ export default class Rhomb implements Shape2D {
   }
 
   public getInscribedRadius(): number {
-    return parseFloat((this.h / 2).toFixed(3));
+    return this.toFloat3(this.h / 2);
   }
 
   public getCircumscribedRadius(): number {
-    return parseFloat((this.d1 === this.d2 ? 0 : this.d1 / 2).toFixed(3));
+    return this.toFloat3(this.d1 === this.d2 ? 0 : this.d1 / 2);
   }
 }

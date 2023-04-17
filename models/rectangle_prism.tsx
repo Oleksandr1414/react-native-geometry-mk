@@ -11,6 +11,10 @@ export default class RectanglePrism implements Shape3D {
     this.h = h;
   }
 
+  public toFloat3(value: any): number {
+    return parseFloat(value.toFixed(3));
+  }
+
   public getVolume(): number {
     return this.a * this.b * this.h;
   }
