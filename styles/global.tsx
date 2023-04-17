@@ -2,10 +2,19 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    width: "70vw",
+    width: "min(80vw, 700px)",
     display: "flex",
-    padding: 20,
+    paddingTop: 30,
+    paddingBottom: 30,
+    alignSelf: "center",
     alignItems: "center",
+    justifyContent: "center",
+  },
+  inputContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    gap: 10,
     justifyContent: "center",
   },
   navigation: {
@@ -20,8 +29,7 @@ export const styles = StyleSheet.create({
     fontSize: 25,
   },
   label: {
-    fontSize: 18,
-    marginBottom: 5,
+    fontSize: 20,
   },
   input: {
     height: 40,
@@ -40,9 +48,13 @@ export const styles = StyleSheet.create({
   },
   resultBox: {
     marginTop: 5,
-    padding: 3,
-    width: "75%",
-    maxHeight: 250,
-    overflow: "scroll",
+    padding: 10,
+    width: "90%",
+    minHeight: 90,
+    maxHeight: 260,
+    overflowY: "scroll",
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 5,
   },
 });

@@ -44,7 +44,6 @@ export default function Form2D() {
       }
       listRectangles.addItem(new Rectangle(a, b));
     }
-    return;
   };
 
   const viewList = (arr: any) => {
@@ -95,39 +94,47 @@ export default function Form2D() {
         {isRhombSelected ? "Rhomb" : "Rectangle"}
       </Text>
       <View style={styles.container}>
-        <Text style={styles.label}>a:</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="numeric"
-          placeholder={a.toString()}
-          onChangeText={(v) => setA(+v)}
-        />
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>a:</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            placeholder={a.toString()}
+            onChangeText={(v) => setA(+v)}
+          />
+        </View>
         {isRhombSelected ? (
           <>
-            <Text style={styles.label}>h:</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType="numeric"
-              placeholder={h.toString()}
-              onChangeText={(v) => setH(+v)}
-            />
-            <Text style={styles.label}>d1:</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType="numeric"
-              placeholder={d1.toString()}
-              onChangeText={(v) => setD1(+v)}
-            />
-            <Text style={styles.label}>d2:</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType="numeric"
-              placeholder={d2.toString()}
-              onChangeText={(v) => setD2(+v)}
-            />
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>h:</Text>
+              <TextInput
+                style={styles.input}
+                keyboardType="numeric"
+                placeholder={h.toString()}
+                onChangeText={(v) => setH(+v)}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>d1:</Text>
+              <TextInput
+                style={styles.input}
+                keyboardType="numeric"
+                placeholder={d1.toString()}
+                onChangeText={(v) => setD1(+v)}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>d2:</Text>
+              <TextInput
+                style={styles.input}
+                keyboardType="numeric"
+                placeholder={d2.toString()}
+                onChangeText={(v) => setD2(+v)}
+              />
+            </View>
           </>
         ) : (
-          <>
+          <View style={styles.inputContainer}>
             <Text style={styles.label}>b:</Text>
             <TextInput
               style={styles.input}
@@ -135,7 +142,7 @@ export default function Form2D() {
               placeholder={b.toString()}
               onChangeText={(v) => setB(+v)}
             />
-          </>
+          </View>
         )}
         <Button
           title="Calc"

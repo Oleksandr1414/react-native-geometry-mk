@@ -74,7 +74,7 @@ export default function Form3D() {
   }, [isUpdate]);
 
   return (
-    <View>
+    <View style={{ backgroundColor: "#B9EDDD", width: "100%" }}>
       <Text style={{ fontSize: 40, textAlign: "center", padding: 5 }}>
         3D Shapes
       </Text>
@@ -92,22 +92,26 @@ export default function Form3D() {
         {isRectanglePrism ? "Rectanlge Prism" : "Pentagonal Pyramid"}
       </Text>
       <View style={styles.container}>
-        <Text style={styles.label}>a:</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="numeric"
-          placeholder={a.toString()}
-          onChangeText={(v) => setA(+v)}
-        />
-        <Text style={styles.label}>h:</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="numeric"
-          placeholder={h.toString()}
-          onChangeText={(v) => seth(+v)}
-        />
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>a:</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            placeholder={a.toString()}
+            onChangeText={(v) => setA(+v)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>h:</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            placeholder={h.toString()}
+            onChangeText={(v) => seth(+v)}
+          />
+        </View>
         {isRectanglePrism ? (
-          <>
+          <View style={styles.inputContainer}>
             <Text style={styles.label}>b:</Text>
             <TextInput
               style={styles.input}
@@ -115,9 +119,9 @@ export default function Form3D() {
               placeholder={b.toString()}
               onChangeText={(v) => setB(+v)}
             />
-          </>
+          </View>
         ) : (
-          <>
+          <View style={styles.inputContainer}>
             <Text style={styles.label}>H:</Text>
             <TextInput
               style={styles.input}
@@ -125,7 +129,7 @@ export default function Form3D() {
               placeholder={H.toString()}
               onChangeText={(v) => setH(+v)}
             />
-          </>
+          </View>
         )}
         <Button
           title="Calc"
