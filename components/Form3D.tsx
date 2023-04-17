@@ -23,8 +23,8 @@ export default function Form3D() {
   const resultBox = (volume: number, area: number) => {
     return (
       <View style={styles.result} key={Math.random() * 1000}>
-        <Text style={{ fontSize: 20 }}>Volume: {volume}</Text>
-        <Text style={{ fontSize: 20 }}>Total Area: {area}</Text>
+        <Text style={{ fontSize: 17 }}>Volume: {volume}</Text>
+        <Text style={{ fontSize: 17 }}>Total Area: {area}</Text>
       </View>
     );
   };
