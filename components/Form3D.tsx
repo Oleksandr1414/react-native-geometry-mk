@@ -6,51 +6,72 @@ import RectanglePrism from "../models/rectangle_prism";
 import { Button, Text, TextInput, View } from "react-native";
 import { styles } from "../styles/global";
 
+const listPentagonalPyramids: ListPentagonalPyramids =
+  new ListPentagonalPyramids();
+const listRectanglePrisms: ListRectanglePrisms = new ListRectanglePrisms();
+
 export default function Form3D() {
   const [isRectanglePrism, setIsRectanglePrism] =
     React.useState<boolean>(false);
-  const listPentagonalPyramids: ListPentagonalPyramids =
-    new ListPentagonalPyramids();
-  const listRectanglePrisms: ListRectanglePrisms = new ListRectanglePrisms();
+  const [isUpdate, setIsUpdate] = React.useState<boolean>(false);
 
   const [a, setA] = React.useState<number>(0);
   const [b, setB] = React.useState<number>(0);
   const [h, seth] = React.useState<number>(0);
   const [H, setH] = React.useState<number>(0);
 
-  const viewResult = (volume: number, area: number) => {
+  const resultBox = (volume: number, area: number) => {
     return (
-      <View style={styles.result}>
+      <View style={styles.result} key={Math.random() * 1000}>
         <Text style={{ fontSize: 20 }}>Volume: {volume}</Text>
         <Text style={{ fontSize: 20 }}>Total Area: {area}</Text>
       </View>
     );
   };
 
-  const shape = React.useMemo(() => {
+  const calculate = () => {
     if (isRectanglePrism) {
       if (!a || !h || !b) {
-        return (
-          <Text style={{ fontSize: 24 }}>
-            <i>Input parametrs..</i>
-          </Text>
-        );
+        alert("Input parametrs..");
+        return;
       }
-
-      const shapeObj: RectanglePrism = new RectanglePrism(a, b, h);
-      return viewResult(shapeObj.getVolume(), shapeObj.getTotalArea());
+      listRectanglePrisms.addItem(new RectanglePrism(a, b, h));
     } else {
       if (!a || !h || !H) {
-        return (
-          <Text style={{ fontSize: 24 }}>
-            <i>Input parametrs..</i>
-          </Text>
-        );
+        alert("Input parametrs..");
+        return;
       }
-      const shapeObj: PentagonalPyramid = new PentagonalPyramid(a, h, H);
-      return viewResult(shapeObj.getVolume(), shapeObj.getTotalArea());
+      listPentagonalPyramids.addItem(new PentagonalPyramid(a, h, H));
     }
-  }, [a, b, h, H]);
+  };
+
+  const viewList = (arr: any) => {
+    const list: any = [];
+    for (let i = 0; i < arr.getSize(); i++) {
+      const shapeObj = arr.getItem(i);
+      list.push(resultBox(shapeObj.getVolume(), shapeObj.getTotalArea()));
+    }
+    return list;
+  };
+
+  const result = React.useMemo(() => {
+    return [
+      <Text
+        style={{ fontSize: 16, fontWeight: "bold", padding: "5px 0" }}
+        key={"text1"}
+      >
+        Rectangle Prisms -----------------------------
+      </Text>,
+      ...viewList(listRectanglePrisms),
+      <Text
+        style={{ fontSize: 16, fontWeight: "bold", padding: "5px 0" }}
+        key={"text2"}
+      >
+        Pentagonal Pyramids -------------------------
+      </Text>,
+      ...viewList(listPentagonalPyramids),
+    ];
+  }, [isUpdate]);
 
   return (
     <View>
@@ -106,7 +127,17 @@ export default function Form3D() {
             />
           </>
         )}
-        {shape}
+        <Button
+          title="Calc"
+          onPress={() => {
+            setIsUpdate(!isUpdate);
+            calculate();
+          }}
+        />
+        <Text style={{ fontSize: 20, textAlign: "center", marginTop: 10 }}>
+          History
+        </Text>
+        <View style={styles.resultBox}>{result}</View>
       </View>
     </View>
   );

@@ -1,16 +1,17 @@
-import Container from "../models/base/container";
+import ListRectangles from "../models/lists/list_rectangles";
 import ListRhombs from "../models/lists/list_rhombs";
 import React from "react";
 import Rectangle from "../models/rectangle";
 import Rhomb from "../models/rhomb";
 import { Button, Text, TextInput, View } from "react-native";
 import { styles } from "../styles/global";
-import ListRectangles from "../models/lists/list_rectangles";
+
+const listRhombs: ListRhombs = new ListRhombs();
+const listRectangles: ListRectangles = new ListRectangles();
 
 export default function Form2D() {
   const [isRhombSelected, setIsRhombSelected] = React.useState<boolean>(false);
-  const listRhombs: ListRhombs = new ListRhombs();
-  const listRectangles: ListRectangles = new ListRectangles();
+  const [isUpdate, setIsUpdate] = React.useState<boolean>(false);
 
   const [a, setA] = React.useState<number>(0);
   const [b, setB] = React.useState<number>(0);
@@ -18,9 +19,9 @@ export default function Form2D() {
   const [d1, setD1] = React.useState<number>(0);
   const [d2, setD2] = React.useState<number>(0);
 
-  const viewResult = (p: number, area: number, r: number, R: number) => {
+  const resultBox = (p: number, area: number, r: number, R: number) => {
     return (
-      <View style={styles.result}>
+      <View style={styles.result} key={Math.random() * 1000}>
         <Text style={{ fontSize: 17 }}>Perimeter: {p}</Text>
         <Text style={{ fontSize: 17 }}>Area: {area}</Text>
         <Text style={{ fontSize: 17 }}>Inscribed Radius: {r}</Text>
@@ -29,40 +30,57 @@ export default function Form2D() {
     );
   };
 
-  const shape = React.useMemo(() => {
+  const calculate = () => {
     if (isRhombSelected) {
       if (!a || !h || !d1 || !d2) {
-        return (
-          <Text style={{ fontSize: 24 }}>
-            <i>Input parametrs..</i>
-          </Text>
-        );
+        alert("Input parametrs..");
+        return;
       }
-      const shapeObj: Rhomb = new Rhomb(a, h, d1, d2);
-      return viewResult(
-        shapeObj.getPerimeter(),
-        shapeObj.getArea(),
-        shapeObj.getInscribedRadius(),
-        shapeObj.getCircumscribedRadius()
-      );
+      listRhombs.addItem(new Rhomb(a, h, d1, d2));
     } else {
       if (!a || !b) {
-        return (
-          <Text style={{ fontSize: 24 }}>
-            <i>Input parametrs..</i>
-          </Text>
-        );
+        alert("Input parametrs..");
+        return;
       }
+      listRectangles.addItem(new Rectangle(a, b));
+    }
+    return;
+  };
 
-      const shapeObj: Rectangle = new Rectangle(a, b);
-      return viewResult(
-        shapeObj.getPerimeter(),
-        shapeObj.getArea(),
-        shapeObj.getInscribedRadius(),
-        shapeObj.getCircumscribedRadius()
+  const viewList = (arr: any) => {
+    const list: any = [];
+    for (let i = 0; i < arr.getSize(); i++) {
+      const shapeObj = arr.getItem(i);
+      list.push(
+        resultBox(
+          shapeObj.getPerimeter(),
+          shapeObj.getArea(),
+          shapeObj.getInscribedRadius(),
+          shapeObj.getCircumscribedRadius()
+        )
       );
     }
-  }, [a, b, h, d1, d2]);
+    return list;
+  };
+
+  const result = React.useMemo(() => {
+    return [
+      <Text
+        style={{ fontSize: 16, fontWeight: "bold", padding: "5px 0" }}
+        key={"text1"}
+      >
+        Rhombs ----------------------------
+      </Text>,
+      ...viewList(listRhombs),
+      <Text
+        style={{ fontSize: 16, fontWeight: "bold", padding: "5px 0" }}
+        key={"text2"}
+      >
+        Rectangles -------------------------
+      </Text>,
+      ...viewList(listRectangles),
+    ];
+  }, [isUpdate]);
 
   return (
     <View>
@@ -119,7 +137,17 @@ export default function Form2D() {
             />
           </>
         )}
-        {shape}
+        <Button
+          title="Calc"
+          onPress={() => {
+            setIsUpdate(!isUpdate);
+            calculate();
+          }}
+        />
+        <Text style={{ fontSize: 20, textAlign: "center", marginTop: 10 }}>
+          History
+        </Text>
+        <View style={styles.resultBox}>{result}</View>
       </View>
     </View>
   );

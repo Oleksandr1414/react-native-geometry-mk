@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    width: "95vw",
+    width: "70vw",
     display: "flex",
     padding: 20,
     alignItems: "center",
@@ -34,7 +34,15 @@ export const styles = StyleSheet.create({
   },
   result: {
     width: "100%",
-    marginTop: 20,
+    marginTop: 5,
+    marginBottom: 5,
     fontWeight: "bold",
+  },
+  resultBox: {
+    marginTop: 5,
+    padding: 3,
+    width: "75%",
+    maxHeight: 250,
+    overflow: "scroll",
   },
 });
